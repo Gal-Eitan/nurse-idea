@@ -12,12 +12,12 @@ The game will be designed for casual players, with short sessions lasting approx
 
 Our main competitors include games such as _Heart's Medicine_, _Project Hospital_, and _Two Point Hospital_.
 
-These games focus on treating patients, managing hospital resources, or operating medical facilities. Our game will distinguish itself by focusing on a single nurse and the challenges of working under pressure.
+These games focus on treating patients, managing hospital resources, or operating medical facilities. Our game will distinguish itself by focusing on a single nurse and the challenges of working under pressure, managing limited resources such as energy and wakefulness and juggling the many demanding tasks this job requires. 
 ## 4. Unique Selling Proposition
 
 Unlike most hospital simulation games, Last Shift will focus on the experience of an individual nurse rather than managing an entire hospital.
 
-Players will have to prioritize patients, perform treatment mini-games, and manage their limited time and energy throughout a demanding shift.
+Players will have to prioritize patients, perform treatment mini-games, and manage their limited time and energy throughout a demanding shift. They will have to constantly make decisions about what they want to prioritize: Their patients or their resources.
 ## 5. Business Model and Monetization
 
 Our game will use a one-time purchase model.
@@ -32,7 +32,6 @@ The game will initially be distributed on Steam and itch.io, with the possibilit
 
 Since Last Shift is a short single-player game, extensive LiveOps will not be necessary.
 
-However, occasional updates could introduce new patients, medical emergencies, and additional challenges to encourage players to return.
 ## 8. Meta-Game
 
 The meta-game will focus on replayability through achievements, high scores, and unlockable content.
