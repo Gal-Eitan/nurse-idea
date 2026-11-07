@@ -5,6 +5,9 @@ The player will only be able to take one item at a time. This is to force them t
 The player will also need to manage their resources (Energy, wakefullness) by going to vending machines and getting snacks for energy and coffee for wakefullness.
 
 An example scenario: Suppose the player is carrying the medicine for patient A (Whose priority is low) and then they get a notification to bring medicine to paitent B (Who needs it more urgently) (I.e. bringing medicine to another patient who needs it immidietly). The player will have to choose between continuing to bring the medicine to patient A or putting the medicine on the floor and going to grab patient Bs medicine and bring it to them.
+## Win and Lose Conditions
+The player will win if they manage to make it to the end of the shift with energy and wakefullness remaining.
+The player will lose if they get to 0 energy, and they will have to restart the shift upon loss.
 
 --- 
 
@@ -23,8 +26,12 @@ The player will learn how to:
 All required items will be located on the same floor as the patient, allowing players to become familiar with the controls without worrying about navigating multiple floors.
 
 **Main challenge:** Learning the basic delivery and resource-management mechanics.
+
+---
 ## Level 1 — First Floor: General Medical Ward (Easy)
 The first floor will contain several patients who require more frequent treatment than the patient on the ground floor.
+
+The player will be able to travel between floors via two ways: the stairs could be used to go up one floor at a time and the lift can be used to any floor.
 
 Unlike the tutorial, most medical supplies will remain in the storage room on the ground floor. Players will need to travel between the two floors to complete deliveries.
 
