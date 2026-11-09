@@ -2,15 +2,16 @@
 The player will move on a 2d plane in 8 directions. They will navigate several hospital floors and bring needed items and equipment to needed beds in rooms. Each floor will have a top down view of itself and of the player and the objects in it. The player will constantly have to choose between which tasks to prioritize in the hospital. 
 
 The player will only be able to take one item at a time. This is to force them to choose between the tasks that are at hand and decide how are they going to priotize their time and movement.
-The player will also need to manage their resources (Energy, wakefullness) by going to vending machines and getting snacks for energy and coffee for wakefullness.
+The player will also need to manage their resources (Energy, wakefullness) by going to vending machines and getting snacks for energy and coffee for wakefullness. Losing too much energy will make the player move slower and if it reaches 0, the player loses. Losing too much wakefulness will increasingly obscure the player's vision, making it harder to navigate the hospital.
+
+Failing to take care of a patient in time will result in a reduction from the players's "Health Points" (For lack of a better term). If the "Health Points" reach 0, the player will be fired and lose the game.
 
 An example scenario: Suppose the player is carrying the medicine for patient A (Whose priority is low) and then they get a notification to bring medicine to paitent B (Who needs it more urgently) (I.e. bringing medicine to another patient who needs it immidietly). The player will have to choose between continuing to bring the medicine to patient A or putting the medicine on the floor and going to grab patient Bs medicine and bring it to them.
 ## Win and Lose Conditions
-The player will win if they manage to make it to the end of the shift with energy and wakefullness remaining.
+The player will win if they manage to make it to the end of the shift with energy and wakefulness remaining.
 The player will lose if they get to 0 energy, and they will have to restart the shift upon loss.
 
 --- 
-
 ## Level 0 — Ground Floor: General Outpatient Ward (Tutorial)
 The player will start on the ground floor of the hospital, where the main storage room, vending machines, and other essential facilities are located.
 
@@ -47,7 +48,6 @@ For example, two patients may request different medications at the same time. Th
 **Main challenge:** Managing multiple patients while minimizing unnecessary travel between floors.
 
 ---
-
 ## Level 2 — Second Floor: Surgical Ward (Medium)
 The second floor will contain patients recovering from surgery and others preparing for medical procedures.
 
@@ -67,7 +67,6 @@ Some doctors may also work on multiple floors, requiring the player to consider 
 **Main challenge:** Responding to unexpected events while coordinating deliveries and medical staff across multiple floors.
 
 ---
-
 ## Level 3 — Third Floor: Intensive Care Unit (Hard)
 The final floor will be the Intensive Care Unit (ICU), where patients are in critical condition and require constant attention.
 
@@ -86,3 +85,7 @@ For example, a patient in the ICU may urgently require medical equipment while a
 The player will have to decide which tasks to prioritize, knowing that it may be impossible to complete every request on time.
 
 **Main challenge:** Managing emergencies across the entire hospital while making difficult decisions under extreme time pressure.
+
+## Level Diagrams
+
+![[Pasted image 20261109210230.png]]
