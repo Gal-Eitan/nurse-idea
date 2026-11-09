@@ -88,4 +88,4 @@ The player will have to decide which tasks to prioritize, knowing that it may be
 
 ## Level Diagrams
 
-![[Pasted image 20261109210230.png]]
+![Screenshot](images/Pasted%20image%2020261109210230.png)
