@@ -1,0 +1,17 @@
+{
+  "configVersion": "1.2.0",
+  "activeEvent": {
+    "eventId": "WINTER_FLU_SURGE_2026",
+    "isActive": true,
+    "eventTitle": "Live Event: Winter Flu Surge!",
+    "eventDescription": "Unusual influx of flu patients! Check vitals quickly to earn a special winter badge.",
+    "themeTintHex": "#DCEEFF",
+    "modifiers": {
+      "vitalsTaskProbabilityMultiplier": 1.8,
+      "taskSpawnIntervalMultiplier": 0.85,
+      "feverPatientSpeedBonus": 1.25,
+      "scoreMultiplier": 1.5
+    },
+    "rewardBadgeId": "BADGE_WINTER_HERO_2026"
+  }
+}
