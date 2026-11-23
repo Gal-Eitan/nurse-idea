@@ -5,17 +5,31 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [Serializable]
-public class LiveOpsConfig
+public class EventModifiers
 {
-    public string configVersion;
-    public string activeEventId;
-    public string eventBannerTitle;
-    public string eventBannerDescription;
+    public float vitalsTaskProbabilityMultiplier = 1.0f;
     public float taskSpawnIntervalMultiplier = 1.0f;
-    public float patientDeteriorationMultiplier = 1.0f;
-    public int supplyCabinetBonusUnits = 0;
+    public float feverPatientSpeedBonus = 1.0f;
     public float scoreMultiplier = 1.0f;
-    public string highlightedRoomId;
+}
+
+[Serializable]
+public class ActiveEventData
+{
+    public string eventId = "NONE";
+    public bool isActive = false;
+    public string eventTitle = "";
+    public string eventDescription = "";
+    public string themeTintHex = "#FFFFFF";
+    public EventModifiers modifiers = new EventModifiers();
+    public string rewardBadgeId = "";
+}
+
+[Serializable]
+public class LiveConfigData
+{
+    public string configVersion = "1.0.0";
+    public ActiveEventData activeEvent = new ActiveEventData();
 }
 
 public class LiveOpsConfigManager : MonoBehaviour
@@ -23,13 +37,12 @@ public class LiveOpsConfigManager : MonoBehaviour
     public static LiveOpsConfigManager Instance { get; private set; }
 
     [Header("Remote Live Ops JSON Endpoint")]
-    [Tooltip("Raw JSON URL (e.g., GitHub Gist/Repo or CDN). Falls back to StreamingAssets if offline.")]
-    [SerializeField] private string remoteConfigUrl = "https://raw.githubusercontent.com/your-org/last-shift/main/liveops_config.json";
-    [SerializeField] private string localFallbackFileName = "liveops_config.json";
+    [SerializeField] private string remoteConfigUrl = "https://raw.githubusercontent.com/<your-username>/<your-repo>/main/live-config.json";
+    [SerializeField] private string localFallbackFileName = "live-config.json";
     [SerializeField] private float requestTimeoutSeconds = 5f;
 
-    public LiveOpsConfig CurrentConfig { get; private set; }
-    public event Action<LiveOpsConfig> OnConfigLoaded;
+    public LiveConfigData CurrentConfig { get; private set; }
+    public event Action<LiveConfigData> OnConfigLoaded;
 
     private void Awake()
     {
@@ -44,10 +57,10 @@ public class LiveOpsConfigManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FetchLiveOpsConfig());
+        StartCoroutine(FetchLiveConfig());
     }
 
-    public IEnumerator FetchLiveOpsConfig()
+    public IEnumerator FetchLiveConfig()
     {
         using (UnityWebRequest request = UnityWebRequest.Get(remoteConfigUrl))
         {
@@ -76,8 +89,7 @@ public class LiveOpsConfigManager : MonoBehaviour
         }
         else
         {
-            CurrentConfig = new LiveOpsConfig();
-            Debug.Log("[LiveOps] No local file found. Using built-in default parameters.");
+            CurrentConfig = new LiveConfigData();
             OnConfigLoaded?.Invoke(CurrentConfig);
         }
     }
@@ -86,14 +98,23 @@ public class LiveOpsConfigManager : MonoBehaviour
     {
         try
         {
-            CurrentConfig = JsonUtility.FromJson<LiveOpsConfig>(json);
-            Debug.Log($"[LiveOps] Loaded '{CurrentConfig.activeEventId}' (v{CurrentConfig.configVersion}) from {source}.");
+            CurrentConfig = JsonUtility.FromJson<LiveConfigData>(json);
+
+            // If isActive is false, reset modifiers to neutral 1.0x baseline
+            if (CurrentConfig.activeEvent == null || !CurrentConfig.activeEvent.isActive)
+            {
+                if (CurrentConfig.activeEvent == null)
+                    CurrentConfig.activeEvent = new ActiveEventData();
+                CurrentConfig.activeEvent.modifiers = new EventModifiers();
+            }
+
+            Debug.Log($"[LiveOps] Loaded '{CurrentConfig.activeEvent.eventId}' (isActive={CurrentConfig.activeEvent.isActive}, v{CurrentConfig.configVersion}) from {source}.");
             OnConfigLoaded?.Invoke(CurrentConfig);
         }
         catch (Exception ex)
         {
-            Debug.LogError($"[LiveOps] Failed to parse JSON configuration: {ex.Message}");
-            CurrentConfig = new LiveOpsConfig();
+            Debug.LogError($"[LiveOps] JSON parse error: {ex.Message}");
+            CurrentConfig = new LiveConfigData();
             OnConfigLoaded?.Invoke(CurrentConfig);
         }
     }
