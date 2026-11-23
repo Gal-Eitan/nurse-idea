@@ -37,7 +37,7 @@ public class LiveOpsConfigManager : MonoBehaviour
     public static LiveOpsConfigManager Instance { get; private set; }
 
     [Header("Remote Live Ops JSON Endpoint")]
-    [SerializeField] private string remoteConfigUrl = "https://raw.githubusercontent.com/<your-username>/<your-repo>/main/live-config.json";
+    [SerializeField] private string remoteConfigUrl = "https://raw.githubusercontent.com/Gal-Eitan/nurse-idea/main/live-config.json";
     [SerializeField] private string localFallbackFileName = "live-config.json";
     [SerializeField] private float requestTimeoutSeconds = 5f;
 
