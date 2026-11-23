@@ -238,8 +238,28 @@ Below is the dynamic configuration file (`live-config.json`) activating a weeken
 }
 ```
 
-**How the Code Utilizes This Configuration:**
+### Live Event Verification Guide (For Grading)
 
-1. **`UIEventBanner`:** Checks if `activeEvent.isActive == true`. If active, displays a winter-blue banner (`themeTintHex`) on the start screen with the event's title and description.
-2. **`PatientSpawner`:** Multiplies the spawn probability of temperature and vitals-check tasks by $1.8$ (`vitalsTaskProbabilityMultiplier`) and shortens the interval between incoming patients by $15\%$ (`taskSpawnIntervalMultiplier`).
-3. **`ScoreManager`:** Multiplies the player's final score by $1.5$ (`scoreMultiplier`), and upon successfully completing the shift ($\ge 80\%$), unlocks the exclusive `BADGE_WINTER_HERO_2026` in the achievements gallery.
+#### 1. Configuration Values to Change
+Open `live-config.json` (either in the remote repository URL or locally in `Assets/StreamingAssets/live-config.json`). Currently, the **Winter Flu Surge** event is active (`"isActive": true`). To toggle or modify the live event without recompiling the game, edit the following fields inside `"activeEvent"`:
+
+| JSON Path | Normal Shift (Disabled) | Live Event Value (Enabled) | In-Game Effect |
+| :--- | :--- | :--- | :--- |
+| `activeEvent.isActive` | `false` | `true` | Enables/disables the live event banner, tint, badge reward, and modifiers |
+| `activeEvent.eventTitle` | `""` | `"Live Event: Winter Flu Surge!"` | Text displayed in the top HUD event banner |
+| `activeEvent.themeTintHex` | `"#FFFFFF"` | `"#DCEEFF"` | Applies a cool winter blue tint to the HUD/ward lighting |
+| `activeEvent.modifiers.vitalsTaskProbabilityMultiplier` | `1.0` | `1.8` | Increases the spawn probability of vitals-check tasks by 80% |
+| `activeEvent.modifiers.taskSpawnIntervalMultiplier` | `1.0` | `0.85` | Reduces the interval between incoming tasks by 15% (set to `0.5` for 2x spawn speed) |
+| `activeEvent.modifiers.feverPatientSpeedBonus` | `1.0` | `1.25` | Increases fever-patient deterioration/urgency speed by 25% |
+| `activeEvent.modifiers.scoreMultiplier` | `1.0` | `1.5` | Multiplies all points earned during the shift by 1.5x |
+| `activeEvent.rewardBadgeId` | `""` | `"BADGE_WINTER_HERO_2026"` | Unlocks the Winter Hero badge on the summary screen upon shift completion |
+
+#### 2. How to Trigger the Event
+1. **Toggle or Adjust Config:** In `live-config.json`, ensure `"activeEvent.isActive"` is set to `true` (or set it to `false` first to observe a standard shift, then change it back to `true` and adjust `"taskSpawnIntervalMultiplier"` to `0.85` or `0.5` to verify live parameter updates).
+2. **Start or Restart the Shift:** Launch the game (or reload the shift scene). On initialization, `LiveOpsConfigManager.Start()` runs `FetchLiveConfig()`, parses `live-config.json` via `JsonUtility.FromJson<LiveConfigData>()`, and fires the `OnConfigLoaded` C# event to update the task spawner, scoring manager, and HUD immediately.
+
+#### 3. What the Grader Should See in the Game
+* **HUD Event Banner & Winter Tint:** A banner appears at the top of the screen reading **"Live Event: Winter Flu Surge!"** with the event description, accompanied by a subtle icy-blue (`#DCEEFF`) UI/lighting tint.
+* **Higher Vitals Task Frequency & Faster Waves:** Vitals-check tasks appear noticeably more often (`1.8x` probability) and overall tasks arrive faster (`0.85x` spawn interval), with fever patients' urgency bars draining `1.25x` faster.
+* **1.5x Score Multiplier & Winter Badge:** Completing treatment minigames awards `1.5x` points in real time, and finishing the shift displays the unlocked **`BADGE_WINTER_HERO_2026`** icon on the End-of-Shift Summary screen.
+* **Unity Console Log:** The console outputs `[LiveOps] Loaded 'WINTER_FLU_SURGE_2026' (isActive=True, v1.2.0) from Remote Server.` (or `from Local StreamingAssets`).
