@@ -3,11 +3,12 @@
   "activeEvent": {
     "eventId": "WINTER_FLU_SURGE_202611111",
     "isActive": true,
-    "frameImageUrl": "https://raw.githubusercontent.com/Gal-Eitan/nurse-idea/refs/heads/main/frames/snow_frame.png",
+    "frameImageUrl": "https://raw.githubusercontent.com/Gal-Eitan/nurse-idea/main/frames/snow_frame.png",
     "eventTitle": "Live Event: Winter Flu Surge!",
     "eventDescription": "Unusual influx of flu patients! Check vitals quickly to earn a special winter badge.",
     "themeTintHex": "#DCEEFF",
     "modifiers": {
+      "nurseSpeedMultiplier": 1.4,
       "vitalsTaskProbabilityMultiplier": 1.8,
       "taskSpawnIntervalMultiplier": 0.85,
       "feverPatientSpeedBonus": 1.25,
@@ -15,7 +16,6 @@
       "itemsRequestsMultiplier": {
         "Thermometer": 3
       }
-      
     }
   }
 }
