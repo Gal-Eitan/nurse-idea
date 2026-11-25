@@ -1,7 +1,7 @@
 {
   "configVersion": "1.2.0",
   "activeEvent": {
-    "eventId": "WINTER_FLU_SURGE_2026",
+    "eventId": "WINTER_FLU_SURGE_202611111",
     "isActive": true,
     "frameImageUrl": "https://raw.githubusercontent.com/Gal-Eitan/nurse-idea/refs/heads/main/frames/snow_frame.png"
     "eventTitle": "Live Event: Winter Flu Surge!",
