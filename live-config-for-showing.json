@@ -14,7 +14,7 @@
       "feverPatientSpeedBonus": 1.25,
       "scoreMultiplier": 1.5,
       "itemsRequestsMultiplier": {
-        "Thermometer": 3
+        "Thermometer": 8
       }
     }
   }
